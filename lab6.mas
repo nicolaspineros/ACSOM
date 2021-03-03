@@ -1,0 +1,451 @@
+/Miguel Ángel Rodríguez Siachoque - ACSO.
+/Se toman los datos de X y Y de cada punto.
+            input
+            store       xa
+            input
+            store       ya
+            input
+            store       xb
+            input
+            store       yb
+            input
+            store       xc
+            input
+            store       yc
+
+/Se mide la distancia del punto A al punto B.
+            load        xa
+            store       x1
+            load        xb
+            store       x2
+            load        ya
+            store       y1
+            load        yb
+            store       y2
+            jns         lon
+            store       lonab
+
+/Se mide la distancia del punto B al punto C.
+            load        xb
+            store       x1
+            load        xc
+            store       x2
+            load        yb
+            store       y1
+            load        yc
+            store       y2
+            jns         lon
+            store       lonbc
+
+/Se mide la distancia del punto C al punto A.
+            load        xc 
+            store       x1
+            load        xa
+            store       x2
+            load        yc
+            store       y1
+            load        ya
+            store       y2
+            jns         lon
+            store       lonca
+
+/Se obtiene el angulo de A.
+            load        lonbc
+            store       cosaa
+            load        lonca
+            store       cosab
+            load        lonab
+            store       cosac
+            jns         angulo
+            store       cosA
+
+/Se obtiene el angulo de B.
+            load        lonca
+            store       cosaa
+            load        lonab
+            store       cosab
+            load        lonbc
+            store       cosac
+            jns         angulo
+            store       cosB
+
+/Se obtiene el angulo de C.
+            load        lonab
+            store       cosaa
+            load        lonbc
+            store       cosab
+            load        lonca
+            store       cosac
+            jns         angulo
+            store       cosC
+
+/Obtiene los datos finales de cada lado.
+            load        cosA
+            add         ten
+            skipcond    400
+            jump        obtA
+            load        oneneg
+            jump        end
+ 
+/Obtiene datos de A.
+obtA,       load        cosA
+            skipcond    000
+            jump        recA
+            load        two
+            jump        end           
+recA,       load        cosA
+            skipcond    400
+            jump        chkB
+            load        three
+            jump        end
+
+/Obtiene datos de B.
+chkB,       load        cosB
+            add         ten
+            skipcond    400
+            jump        obtB
+            load        oneneg
+            jump        end
+obtB,       load        cosB
+            skipcond    000
+            jump        recB
+            load        two
+            jump        end
+recB,       load        cosB
+            skipcond    400
+            jump        chkC
+            load        three
+            jump        end
+
+/Obtiene datos de C.
+chkC,       load        cosC
+            add         ten
+            skipcond    400
+            jump        obtC
+            load        oneneg
+            jump        end
+obtC,       load        cosC
+            skipcond    000
+            jump        recC
+            load        two
+            jump        end
+recC,       load        cosC
+            skipcond    400
+            jump        acuEnd
+            load        three
+            jump        end
+
+acuEnd,     load        onepos
+
+/Realiza la salida de perimetro correspondiente.
+end,        output
+            halt
+
+/Variables principales.
+xa,         dec         0
+ya,         dec         0
+xb,         dec         0
+yb,         dec         0
+xc,         dec         0
+yc,         dec         0
+lonab,      dec         0
+lonbc,      dec         0
+lonca,      dec         0
+cosA,       dec         0
+cosB,       dec         0
+cosC,       dec         0
+onepos,     dec         1
+oneneg,     dec        -1
+two,        dec         2
+three,      dec         3
+ten,        dec         10
+
+
+/Calcula las distancias de un punto a otro punto.
+/Cuadrado de X.
+lon,        dec         0
+            load        x2
+            subt        x1
+            store       xmult
+            store       ymult
+            jns         mult
+            store       lonx12
+/Cuadrado de Y.
+            load        y2
+            subt        y1
+            store       xmult
+            store       ymult
+            jns         mult
+            store       lony12
+/Suma de cuadrados de X y Y.
+            load        lonx12
+            add         lony12
+            store       xraiz
+            jns         raiz
+            jumpi       lon
+/Variable de lon.
+x1,    	    dec         0
+x2,    	    dec         0
+y1,    	    dec         0
+y2,    	    dec         0
+lonx12,     dec         0
+lony12,     dec         0
+
+
+
+/Calcula el angulo del lado correspondiente.
+angulo,     dec         0
+            clear
+            store       cosaa2
+            store       cosab2
+            store       cosac2
+            store       cosa2bc
+/Calcular el cuadrado de A.
+            load        cosaa
+            store       xmult
+            store       ymult
+            jns         mult
+            store       cosaa2
+/Calcular el cuadrado de B.
+            load        cosab
+            store       xmult
+            store       ymult
+            jns         mult
+            store       cosab2
+/Calcular el cuadrado de C.
+            load        cosac
+            store       xmult
+            store       ymult
+            jns         mult
+            store       cosac2
+/Calcular el cuadrado de 2BC.
+            load        twocosa
+            store       xmult
+            load        cosab
+            store       ymult
+            jns         mult
+            store       xmult
+            load        cosac
+            store       ymult
+            jns         mult
+            store       cosa2bc
+/Serealiza la division.
+            load        cosab2
+            add         cosac2
+            subt        cosaa2
+            store       xmult
+            load        tencosa
+            store       ymult
+            jns         mult
+            store       xdiv
+            load        cosa2bc
+            store       ydiv
+            jns         div
+            jumpi       angulo
+/Variables de angulo.
+cosaa,      dec         0
+cosab,      dec         0
+cosac,      dec         0
+cosaa2,     dec         0
+cosab2,     dec         0
+cosac2,     dec         0
+cosa2bc,    dec         0
+twocosa,    dec         2
+tencosa,    dec         10
+
+
+
+/Calcular la multiplicacion entre un dato X y Y.
+mult,       dec         0
+            clear
+            store       imult
+            store       summult
+            store       signomult
+            load        xmult
+            skipcond    000
+            jump        mult2
+            load        signomult
+            add         onemult
+            store       signomult
+/Ajusta los datos.
+mult2,	    load        ymult
+            skipcond    000
+            jump        start
+            load        signomult
+            add         onemult
+            store       signomult
+/Realiza la multiplicacion con abs.
+start,      load        xmult
+            store       x
+            jns         abs
+            store       xmult
+            load        ymult
+            store       x
+            jns         abs
+            store       ymult
+/Suma la multiplicacion.
+            clear
+            store       summult
+            store       imult
+while,      subt        ymult
+            skipcond    000
+            jump        endwhile
+            load        summult
+            add         xmult
+            store       summult
+            load        imult
+            add         onemult
+            store       imult
+            jump        while
+endwhile,   load        signomult
+            skipcond    400
+            jump        check1
+            jump        return
+/Verifica si el producto es negativo.
+check1,     subt        twomult
+            skipcond    400
+            jump        negative
+            jump        return
+/Establece el producto positivo
+negative,   clear
+            subt        summult
+            store       summult
+/Retorna el producto.
+return,     load	summult
+            jumpi       mult
+/Variables de mult.
+xmult,      dec         0
+ymult,      dec         0
+imult,      dec         0
+summult,    dec         0
+signomult,  dec         0
+onemult,    dec         1
+twomult,    dec         2
+
+
+
+/Realiza que el dato x sea positivo.
+abs,        dec         0
+            clear
+            store       res
+            load        x
+            skipcond    000
+            jumpi       abs
+            load        res
+            subt        x
+            jumpi       abs
+/Variable de abs.
+x,       dec         0
+res,     dec         0
+
+
+
+/Se obtiene la raiz cuadrada de X dato.
+raiz,       dec         0        
+            load        oneraiz
+            store       iraiz
+            store       resraiz
+/Verifica si los csaso anteriores.
+            load        xraiz
+            skipcond    400
+            jump        raiz1
+            jumpi       raiz
+raiz1,      subt        tenraiz
+            skipcond    400
+            jump        generar
+            load        xraiz
+            jumpi       raiz
+/Caso principal.
+generar,    load        resraiz
+            subt        xraiz
+            skipcond    000
+            jump        while2
+            jump        while3
+while2,     skipcond    400
+            jump        endwhile2
+while3,     load        iraiz
+            add         oneraiz
+            store       iraiz
+            store       xmult
+            store       ymult
+            jns         mult
+            store       resraiz
+            jump        generar
+endwhile2,  load        iraiz
+            subt        oneraiz
+            jumpi       raiz
+/Variables de raiz.
+oneraiz,    dec         1
+tenraiz,    dec         10
+iraiz,      dec         1
+resraiz,    dec         1
+xraiz,      dec         0
+
+
+
+div,	    dec         0
+            clear
+            store       resdiv
+            store       signodiv
+/Verifica si los datos son positivos.
+            load        xdiv
+            skipcond    000
+            jump        div2
+            load        signodiv
+            add         onediv
+            store       signodiv
+div2,       load        ydiv
+            skipcond    000
+            jump        rundiv
+            load        signodiv
+            add         onediv
+            store       signodiv
+/Convierte los datos a posistivos.
+rundiv,     load        xdiv 
+            store       x
+            jns         abs
+            store       xdiv
+            load        ydiv
+            store       x
+            jns         abs
+            store       ydiv
+/Realiza la division.
+            clear                       
+            store	resdiv
+            load	xdiv
+while4,     subt	ydiv
+            skipcond	800
+            jump	equals
+operation,  store	xdiv
+            load	resdiv
+            add	        onediv
+            store	resdiv
+            load	xdiv
+            jump	while4
+equals,	    skipcond	400
+            jump	endwhile4
+            jump	operation
+/Verifica el signo de la division.
+endwhile4,  load        signodiv
+            skipcond    400
+            jump        check2
+            jump        return2
+/Verifica si el resultado es negativo.
+check2,     subt        twodiv
+            skipcond    400
+            jump        nagative2
+            jump        return2
+/Establece el resultado positivo.
+nagative2,   clear
+            subt        resdiv
+            store       resdiv
+/retorna la division.
+return2,    load		resdiv
+            jumpI		div
+/Variable de div.
+xdiv,		dec		0
+ydiv,		dec		0
+resdiv,		dec		0
+signodiv,  	dec		0
+onediv,		dec		1
+twodiv,    	dec       	2

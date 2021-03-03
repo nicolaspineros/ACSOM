@@ -1,0 +1,545 @@
+CHIP Memoria{
+	IN inh[15], inl[15], w, a8, a7, a6, a5, a4, a3, a2, a1, a0;
+	OUT outh[15], outl[15];
+
+	PARTS:
+/PART OUTH AND OUTL.
+	/PART OUT[0].
+	Or(a = a8, b = a7, out = orout0);
+	Or(a = a8, b = a7, out = orout1);
+
+	Or(a = orout0, b = a6, out = orout2);
+	Or(a = a5, b = a4, out = orout3);
+	Or(a = a3, b = a2, out = orout4);
+	Or(a = a1, b = a0, out = orout5);
+	Or(a = orout1, b = a6, out = orout6);
+	Or(a = a5, b = a4, out = orout7);
+	Or(a = a3, b = a2, out = orout8);
+	Or(a = a1, b = a0, out = orout9);
+
+	Or(a = orout2, b = orout3, out = orout10);
+	Or(a = orout4, b = orout5, out = orout11);
+	Or(a = orout6, b = orout7, out = orout12);
+	Or(a = orout8, b = orout9, out = orout13);
+
+	Or(a = orout10, b = orout11, out = orout14);
+	Not(in = orout14, out = notout0);
+	Or(a = orout12, b = orout13, out = orout15);
+	Not(in = orout14, out = notout1);
+	Not(in = inh[0], out = notout2);
+
+	And(a = notout0, b = inl[0], out = andout0);
+	And(a = notout1, b = notout2, out = andout1);
+
+	And(a = andout0, b = w, out = andout2);
+	And(a = inh[0], b = w, out = andout3);
+	And(a = andout1, b = w, out = andout4);
+	And(a = inl[0], b = w, out = andout5);
+
+	Or(a = andout2, b = andout3, out = outh[0]);
+	Or(a = andout4, b = andout5, out = outl[0]);
+
+
+	/PART OUT[1].
+	Or(a = a8, b = a7, out = orout0a);
+	Or(a = a8, b = a7, out = orout1a);
+
+	Or(a = orout0a, b = a6, out = orout2a);
+	Or(a = a5, b = a4, out = orout3a);
+	Or(a = a3, b = a2, out = orout4a);
+	Or(a = a1, b = a0, out = orout5a);
+	Or(a = orout1a, b = a6, out = orout6a);
+	Or(a = a5, b = a4, out = orout7a);
+	Or(a = a3, b = a2, out = orout8a);
+	Or(a = a1, b = a0, out = orout9a);
+
+	Or(a = orout2a, b = orout3a, out = orout10a);
+	Or(a = orout4a, b = orout5a, out = orout11a);
+	Or(a = orout6a, b = orout7a, out = orout12a);
+	Or(a = orout8a, b = orout9a, out = orout13a);
+
+	Or(a = orout10a, b = orout11a, out = orout14a);
+	Not(in = orout14a, out = notout0a);
+	Or(a = orout12a, b = orout13a, out = orout15a);
+	Not(in = orout14a, out = notout1a);
+	Not(in = inh[1], out = notout2a);
+
+	And(a = notout0a, b = inl[1], out = andout0a);
+	And(a = notout1a, b = notout2a, out = andout1a);
+
+	And(a = andout0a, b = w, out = andout2a);
+	And(a = inh[1], b = w, out = andout3a);
+	And(a = andout1a, b = w, out = andout4a);
+	And(a = inl[1], b = w, out = andout5a);
+
+	Or(a = andout2a, b = andout3a, out = outh[1]);
+	Or(a = andout4a, b = andout5a, out = outl[1]);
+
+
+	/PART OUT[2].
+	Or(a = a8, b = a7, out = orout0b);
+	Or(a = a8, b = a7, out = orout1b);
+
+	Or(a = orout0b, b = a6, out = orout2b);
+	Or(a = a5, b = a4, out = orout3b);
+	Or(a = a3, b = a2, out = orout4b);
+	Or(a = a1, b = a0, out = orout5b);
+	Or(a = orout1b, b = a6, out = orout6b);
+	Or(a = a5, b = a4, out = orout7b);
+	Or(a = a3, b = a2, out = orout8b);
+	Or(a = a1, b = a0, out = orout9b);
+
+	Or(a = orout2b, b = orout3b, out = orout10b);
+	Or(a = orout4b, b = orout5b, out = orout11b);
+	Or(a = orout6b, b = orout7b, out = orout12b);
+	Or(a = orout8b, b = orout9b, out = orout13b);
+
+	Or(a = orout10b, b = orout11b, out = orout14b);
+	Not(in = orout14b, out = notout0b);
+	Or(a = orout12b, b = orout13b, out = orout15b);
+	Not(in = orout14b, out = notout1b);
+	Not(in = inh[2], out = notout2b);
+
+	And(a = notout0b, b = inl[2], out = andout0b);
+	And(a = notout1b, b = notout2b, out = andout1b);
+
+	And(a = andout0b, b = w, out = andout2b);
+	And(a = inh[2], b = w, out = andout3b);
+	And(a = andout1b, b = w, out = andout4b);
+	And(a = inl[2], b = w, out = andout5b);
+
+	Or(a = andout2b, b = andout3b, out = outh[2]);
+	Or(a = andout4b, b = andout5b, out = outl[2]);
+
+
+	/PART OUT[3].
+	Or(a = a8, b = a7, out = orout0c);
+	Or(a = a8, b = a7, out = orout1c);
+
+	Or(a = orout0c, b = a6, out = orout2c);
+	Or(a = a5, b = a4, out = orout3c);
+	Or(a = a3, b = a2, out = orout4c);
+	Or(a = a1, b = a0, out = orout5c);
+	Or(a = orout1c, b = a6, out = orout6c);
+	Or(a = a5, b = a4, out = orout7c);
+	Or(a = a3, b = a2, out = orout8c);
+	Or(a = a1, b = a0, out = orout9c);
+
+	Or(a = orout2c, b = orout3c, out = orout10c);
+	Or(a = orout4c, b = orout5c, out = orout11c);
+	Or(a = orout6c, b = orout7c, out = orout12c);
+	Or(a = orout8c, b = orout9c, out = orout13c);
+
+	Or(a = orout10c, b = orout11c, out = orout14c);
+	Not(in = orout14c, out = notout0c);
+	Or(a = orout12c, b = orout13c, out = orout15c);
+	Not(in = orout14c, out = notout1c);
+	Not(in = inh[3], out = notout2c);
+
+	And(a = notout0c, b = inl[3], out = andout0c);
+	And(a = notout1c, b = notout2c, out = andout1c);
+
+	And(a = andout0c, b = w, out = andout2c);
+	And(a = inh[3], b = w, out = andout3c);
+	And(a = andout1c, b = w, out = andout4c);
+	And(a = inl[3], b = w, out = andout5c);
+
+	Or(a = andout2c, b = andout3c, out = outh[3]);
+	Or(a = andout4c, b = andout5c, out = outl[3]);
+
+
+	/PART OUT[4].
+	Or(a = a8, b = a7, out = orout0d);
+	Or(a = a8, b = a7, out = orout1d);
+
+	Or(a = orout0d, b = a6, out = orout2d);
+	Or(a = a5, b = a4, out = orout3d);
+	Or(a = a3, b = a2, out = orout4d);
+	Or(a = a1, b = a0, out = orout5d);
+	Or(a = orout1d, b = a6, out = orout6d);
+	Or(a = a5, b = a4, out = orout7d);
+	Or(a = a3, b = a2, out = orout8d);
+	Or(a = a1, b = a0, out = orout9d);
+
+	Or(a = orout2d, b = orout3d, out = orout10d);
+	Or(a = orout4d, b = orout5d, out = orout11d);
+	Or(a = orout6d, b = orout7d, out = orout12d);
+	Or(a = orout8d, b = orout9d, out = orout13d);
+
+	Or(a = orout10d, b = orout11d, out = orout14d);
+	Not(in = orout14d, out = notout0d);
+	Or(a = orout12d, b = orout13d, out = orout15d);
+	Not(in = orout14d, out = notout1d);
+	Not(in = inh[4], out = notout2d);
+
+	And(a = notout0d, b = inl[4], out = andout0d);
+	And(a = notout1d, b = notout2d, out = andout1d);
+
+	And(a = andout0d, b = w, out = andout2d);
+	And(a = inh[4], b = w, out = andout3d);
+	And(a = andout1d, b = w, out = andout4d);
+	And(a = inl[4], b = w, out = andout5d);
+
+	Or(a = andout2d, b = andout3d, out = outh[4]);
+	Or(a = andout4d, b = andout5d, out = outl[4]);
+
+
+	/PART OUT[5].
+	Or(a = a8, b = a7, out = orout0e);
+	Or(a = a8, b = a7, out = orout1e);
+
+	Or(a = orout0e, b = a6, out = orout2e);
+	Or(a = a5, b = a4, out = orout3e);
+	Or(a = a3, b = a2, out = orout4e);
+	Or(a = a1, b = a0, out = orout5e);
+	Or(a = orout1e, b = a6, out = orout6e);
+	Or(a = a5, b = a4, out = orout7e);
+	Or(a = a3, b = a2, out = orout8e);
+	Or(a = a1, b = a0, out = orout9e);
+
+	Or(a = orout2e, b = orout3e, out = orout10e);
+	Or(a = orout4e, b = orout5e, out = orout11e);
+	Or(a = orout6e, b = orout7e, out = orout12e);
+	Or(a = orout8e, b = orout9e, out = orout13e);
+
+	Or(a = orout10e, b = orout11e, out = orout14e);
+	Not(in = orout14e, out = notout0e);
+	Or(a = orout12e, b = orout13e, out = orout15e);
+	Not(in = orout14e, out = notout1e);
+	Not(in = inh[5], out = notout2e);
+
+	And(a = notout0e, b = inl[5], out = andout0e);
+	And(a = notout1e, b = notout2e, out = andout1e);
+
+	And(a = andout0e, b = w, out = andout2e);
+	And(a = inh[5], b = w, out = andout3e);
+	And(a = andout1e, b = w, out = andout4e);
+	And(a = inl[5], b = w, out = andout5e);
+
+	Or(a = andout2e, b = andout3e, out = outh[5]);
+	Or(a = andout4e, b = andout5e, out = outl[5]);
+
+
+	/PART OUT[6].
+	Or(a = a8, b = a7, out = orout0f);
+	Or(a = a8, b = a7, out = orout1f);
+
+	Or(a = orout0f, b = a6, out = orout2f);
+	Or(a = a5, b = a4, out = orout3f);
+	Or(a = a3, b = a2, out = orout4f);
+	Or(a = a1, b = a0, out = orout5f);
+	Or(a = orout1f, b = a6, out = orout6f);
+	Or(a = a5, b = a4, out = orout7f);
+	Or(a = a3, b = a2, out = orout8f);
+	Or(a = a1, b = a0, out = orout9f);
+
+	Or(a = orout2f, b = orout3f, out = orout10f);
+	Or(a = orout4f, b = orout5f, out = orout11f);
+	Or(a = orout6f, b = orout7f, out = orout12f);
+	Or(a = orout8f, b = orout9f, out = orout13f);
+
+	Or(a = orout10f, b = orout11f, out = orout14f);
+	Not(in = orout14f, out = notout0f);
+	Or(a = orout12f, b = orout13f, out = orout15f);
+	Not(in = orout14f, out = notout1f);
+	Not(in = inh[6], out = notout2f);
+
+	And(a = notout0f, b = inl[6], out = andout0f);
+	And(a = notout1f, b = notout2f, out = andout1f);
+
+	And(a = andout0f, b = w, out = andout2f);
+	And(a = inh[6], b = w, out = andout3f);
+	And(a = andout1f, b = w, out = andout4f);
+	And(a = inl[6], b = w, out = andout5f);
+
+	Or(a = andout2f, b = andout3f, out = outh[6]);
+	Or(a = andout4f, b = andout5f, out = outl[6]);
+
+
+	/PART OUT[7].
+	Or(a = a8, b = a7, out = orout0g);
+	Or(a = a8, b = a7, out = orout1g);
+
+	Or(a = orout0g, b = a6, out = orout2g);
+	Or(a = a5, b = a4, out = orout3g);
+	Or(a = a3, b = a2, out = orout4g);
+	Or(a = a1, b = a0, out = orout5g);
+	Or(a = orout1g, b = a6, out = orout6g);
+	Or(a = a5, b = a4, out = orout7g);
+	Or(a = a3, b = a2, out = orout8g);
+	Or(a = a1, b = a0, out = orout9g);
+
+	Or(a = orout2g, b = orout3g, out = orout10g);
+	Or(a = orout4g, b = orout5g, out = orout11g);
+	Or(a = orout6g, b = orout7g, out = orout12g);
+	Or(a = orout8g, b = orout9g, out = orout13g);
+
+	Or(a = orout10g, b = orout11g, out = orout14g);
+	Not(in = orout14g, out = notout0g);
+	Or(a = orout12g, b = orout13g, out = orout15g);
+	Not(in = orout14g, out = notout1g);
+	Not(in = inh[7], out = notout2g);
+
+	And(a = notout0g, b = inl[7], out = andout0g);
+	And(a = notout1g, b = notout2g, out = andout1g);
+
+	And(a = andout0g, b = w, out = andout2g);
+	And(a = inh[7], b = w, out = andout3g);
+	And(a = andout1g, b = w, out = andout4g);
+	And(a = inl[7], b = w, out = andout5g);
+
+	Or(a = andout2g, b = andout3g, out = outh[7]);
+	Or(a = andout4g, b = andout5g, out = outl[7]);
+
+
+	/PART OUT[8].
+	Or(a = a8, b = a7, out = orout0h);
+	Or(a = a8, b = a7, out = orout1h);
+
+	Or(a = orout0h, b = a6, out = orout2h);
+	Or(a = a5, b = a4, out = orout3h);
+	Or(a = a3, b = a2, out = orout4h);
+	Or(a = a1, b = a0, out = orout5h);
+	Or(a = orout1h, b = a6, out = orout6h);
+	Or(a = a5, b = a4, out = orout7h);
+	Or(a = a3, b = a2, out = orout8h);
+	Or(a = a1, b = a0, out = orout9h);
+
+	Or(a = orout2h, b = orout3h, out = orout10h);
+	Or(a = orout4h, b = orout5h, out = orout11h);
+	Or(a = orout6h, b = orout7h, out = orout12h);
+	Or(a = orout8h, b = orout9h, out = orout13h);
+
+	Or(a = orout10h, b = orout11h, out = orout14h);
+	Not(in = orout14h, out = notout0h);
+	Or(a = orout12h, b = orout13h, out = orout15h);
+	Not(in = orout14h, out = notout1h);
+	Not(in = inh[8], out = notout2h);
+
+	And(a = notout0h, b = inl[8], out = andout0h);
+	And(a = notout1h, b = notout2h, out = andout1h);
+
+	And(a = andout0h, b = w, out = andout2h);
+	And(a = inh[8], b = w, out = andout3h);
+	And(a = andout1h, b = w, out = andout4h);
+	And(a = inl[8], b = w, out = andout5h);
+
+	Or(a = andout2h, b = andout3h, out = outh[8]);
+	Or(a = andout4h, b = andout5h, out = outl[8]);
+
+
+	/PART OUT[9].
+	Or(a = a8, b = a7, out = orout0i);
+	Or(a = a8, b = a7, out = orout1i);
+
+	Or(a = orout0i, b = a6, out = orout2i);
+	Or(a = a5, b = a4, out = orout3i);
+	Or(a = a3, b = a2, out = orout4i);
+	Or(a = a1, b = a0, out = orout5i);
+	Or(a = orout1i, b = a6, out = orout6i);
+	Or(a = a5, b = a4, out = orout7i);
+	Or(a = a3, b = a2, out = orout8i);
+	Or(a = a1, b = a0, out = orout9i);
+
+	Or(a = orout2i, b = orout3i, out = orout10i);
+	Or(a = orout4i, b = orout5i, out = orout11i);
+	Or(a = orout6i, b = orout7i, out = orout12i);
+	Or(a = orout8i, b = orout9i, out = orout13i);
+
+	Or(a = orout10i, b = orout11i, out = orout14i);
+	Not(in = orout14i, out = notout0i);
+	Or(a = orout12i, b = orout13i, out = orout15i);
+	Not(in = orout14i, out = notout1i);
+	Not(in = inh[9], out = notout2i);
+
+	And(a = notout0i, b = inl[9], out = andout0i);
+	And(a = notout1i, b = notout2i, out = andout1i);
+
+	And(a = andout0i, b = w, out = andout2i);
+	And(a = inh[9], b = w, out = andout3i);
+	And(a = andout1i, b = w, out = andout4i);
+	And(a = inl[9], b = w, out = andout5i);
+
+	Or(a = andout2i, b = andout3i, out = outh[9]);
+	Or(a = andout4i, b = andout5i, out = outl[9]);
+
+
+	/PART OUT[10].
+	Or(a = a8, b = a7, out = orout0j);
+	Or(a = a8, b = a7, out = orout1j);
+
+	Or(a = orout0j, b = a6, out = orout2j);
+	Or(a = a5, b = a4, out = orout3j);
+	Or(a = a3, b = a2, out = orout4j);
+	Or(a = a1, b = a0, out = orout5j);
+	Or(a = orout1j, b = a6, out = orout6j);
+	Or(a = a5, b = a4, out = orout7j);
+	Or(a = a3, b = a2, out = orout8j);
+	Or(a = a1, b = a0, out = orout9j);
+
+	Or(a = orout2j, b = orout3j, out = orout10j);
+	Or(a = orout4j, b = orout5j, out = orout11j);
+	Or(a = orout6j, b = orout7j, out = orout12j);
+	Or(a = orout8j, b = orout9j, out = orout13j);
+
+	Or(a = orout10j, b = orout11j, out = orout14j);
+	Not(in = orout14j, out = notout0j);
+	Or(a = orout12j, b = orout13j, out = orout15j);
+	Not(in = orout14j, out = notout1j);
+	Not(in = inh[10], out = notout2j);
+
+	And(a = notout0j, b = inl[10], out = andout0j);
+	And(a = notout1j, b = notout2j, out = andout1j);
+
+	And(a = andout0j, b = w, out = andout2j);
+	And(a = inh[10], b = w, out = andout3j);
+	And(a = andout1j, b = w, out = andout4j);
+	And(a = inl[10], b = w, out = andout5j);
+
+	Or(a = andout2j, b = andout3j, out = outh[10]);
+	Or(a = andout4j, b = andout5j, out = outl[10]);
+
+
+	/PART OUT[11].
+	Or(a = a8, b = a7, out = orout0k);
+	Or(a = a8, b = a7, out = orout1k);
+
+	Or(a = orout0k, b = a6, out = orout2k);
+	Or(a = a5, b = a4, out = orout3k);
+	Or(a = a3, b = a2, out = orout4k);
+	Or(a = a1, b = a0, out = orout5k);
+	Or(a = orout1k, b = a6, out = orout6k);
+	Or(a = a5, b = a4, out = orout7k);
+	Or(a = a3, b = a2, out = orout8k);
+	Or(a = a1, b = a0, out = orout9k);
+
+	Or(a = orout2k, b = orout3k, out = orout10k);
+	Or(a = orout4k, b = orout5k, out = orout11k);
+	Or(a = orout6k, b = orout7k, out = orout12k);
+	Or(a = orout8k, b = orout9k, out = orout13k);
+
+	Or(a = orout10k, b = orout11k, out = orout14k);
+	Not(in = orout14k, out = notout0k);
+	Or(a = orout12k, b = orout13k, out = orout15k);
+	Not(in = orout14k, out = notout1k);
+	Not(in = inh[11], out = notout2k);
+
+	And(a = notout0k, b = inl[11], out = andout0k);
+	And(a = notout1k, b = notout2k, out = andout1k);
+
+	And(a = andout0k, b = w, out = andout2k);
+	And(a = inh[11], b = w, out = andout3k);
+	And(a = andout1k, b = w, out = andout4k);
+	And(a = inl[11], b = w, out = andout5k);
+
+	Or(a = andout2k, b = andout3k, out = outh[11]);
+	Or(a = andout4k, b = andout5k, out = outl[11]);
+
+
+	/PART OUT[12].
+	Or(a = a8, b = a7, out = orout0l);
+	Or(a = a8, b = a7, out = orout1l);
+
+	Or(a = orout0l, b = a6, out = orout2l);
+	Or(a = a5, b = a4, out = orout3l);
+	Or(a = a3, b = a2, out = orout4l);
+	Or(a = a1, b = a0, out = orout5l);
+	Or(a = orout1l, b = a6, out = orout6l);
+	Or(a = a5, b = a4, out = orout7l);
+	Or(a = a3, b = a2, out = orout8l);
+	Or(a = a1, b = a0, out = orout9l);
+
+	Or(a = orout2l, b = orout3l, out = orout10l);
+	Or(a = orout4l, b = orout5l, out = orout11l);
+	Or(a = orout6l, b = orout7l, out = orout12l);
+	Or(a = orout8l, b = orout9l, out = orout13l);
+
+	Or(a = orout10l, b = orout11l, out = orout14l);
+	Not(in = orout14l, out = notout0l);
+	Or(a = orout12l, b = orout13l, out = orout15l);
+	Not(in = orout14l, out = notout1l);
+	Not(in = inh[12], out = notout2l);
+
+	And(a = notout0l, b = inl[12], out = andout0l);
+	And(a = notout1l, b = notout2l, out = andout1l);
+
+	And(a = andout0l, b = w, out = andout2l);
+	And(a = inh[12], b = w, out = andout3l);
+	And(a = andout1l, b = w, out = andout4l);
+	And(a = inl[12], b = w, out = andout5l);
+
+	Or(a = andout2l, b = andout3l, out = outh[12]);
+	Or(a = andout4l, b = andout5l, out = outl[12]);
+
+
+	/PART OUT[13].
+	Or(a = a8, b = a7, out = orout0m);
+	Or(a = a8, b = a7, out = orout1m);
+
+	Or(a = orout0m, b = a6, out = orout2m);
+	Or(a = a5, b = a4, out = orout3m);
+	Or(a = a3, b = a2, out = orout4m);
+	Or(a = a1, b = a0, out = orout5m);
+	Or(a = orout1m, b = a6, out = orout6m);
+	Or(a = a5, b = a4, out = orout7m);
+	Or(a = a3, b = a2, out = orout8m);
+	Or(a = a1, b = a0, out = orout9m);
+
+	Or(a = orout2m, b = orout3m, out = orout10m);
+	Or(a = orout4m, b = orout5m, out = orout11m);
+	Or(a = orout6m, b = orout7m, out = orout12m);
+	Or(a = orout8m, b = orout9m, out = orout13m);
+
+	Or(a = orout10m, b = orout11m, out = orout14m);
+	Not(in = orout14m, out = notout0m);
+	Or(a = orout12m, b = orout13m, out = orout15m);
+	Not(in = orout14m, out = notout1m);
+	Not(in = inh[13], out = notout2m);
+
+	And(a = notout0m, b = inl[13], out = andout0m);
+	And(a = notout1m, b = notout2m, out = andout1m);
+
+	And(a = andout0m, b = w, out = andout2m);
+	And(a = inh[13], b = w, out = andout3m);
+	And(a = andout1m, b = w, out = andout4m);
+	And(a = inl[13], b = w, out = andout5m);
+
+	Or(a = andout2m, b = andout3m, out = outh[13]);
+	Or(a = andout4m, b = andout5m, out = outl[13]);
+
+
+	/PART OUT[14].
+	Or(a = a8, b = a7, out = orout0n);
+	Or(a = a8, b = a7, out = orout1n);
+
+	Or(a = orout0n, b = a6, out = orout2n);
+	Or(a = a5, b = a4, out = orout3n);
+	Or(a = a3, b = a2, out = orout4n);
+	Or(a = a1, b = a0, out = orout5n);
+	Or(a = orout1n, b = a6, out = orout6n);
+	Or(a = a5, b = a4, out = orout7n);
+	Or(a = a3, b = a2, out = orout8n);
+	Or(a = a1, b = a0, out = orout9n);
+
+	Or(a = orout2n, b = orout3n, out = orout10n);
+	Or(a = orout4n, b = orout5n, out = orout11n);
+	Or(a = orout6n, b = orout7n, out = orout12n);
+	Or(a = orout8n, b = orout9n, out = orout13n);
+
+	Or(a = orout10n, b = orout11n, out = orout14n);
+	Not(in = orout14n, out = notout0n);
+	Or(a = orout12n, b = orout13n, out = orout15n);
+	Not(in = orout14n, out = notout1n);
+	Not(in = inh[14], out = notout2n);
+
+	And(a = notout0n, b = inl[14], out = andout0n);
+	And(a = notout1n, b = notout2n, out = andout1n);
+
+	And(a = andout0n, b = w, out = andout2n);
+	And(a = inh[14], b = w, out = andout3n);
+	And(a = andout1n, b = w, out = andout4n);
+	And(a = inl[14], b = w, out = andout5n);
+
+	Or(a = andout2n, b = andout3n, out = outh[14]);
+	Or(a = andout4n, b = andout5n, out = outl[14]);
+}

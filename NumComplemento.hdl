@@ -1,0 +1,74 @@
+//Numeros Complementarios - Miguel Ángel Rodríguez Siachoque - 2132211.
+// Trabajo realizado con colaboración del compañero Carlos Amorocho Amorocho.
+
+CHIP NumComplemento{
+
+	IN al[15], ah[15];
+	OUT sl[15], sh[15];
+
+	PARTS:
+	
+	Not(in = al[0], out = dig0);
+	Not(in = al[1], out = dig1);
+	Not(in = al[2], out = dig2);
+	Not(in = al[3], out = dig3);
+	Not(in = al[4], out = dig4);
+	Not(in = al[5], out = dig5);
+	Not(in = al[6], out = dig6);
+	Not(in = al[7], out = dig7);
+	Not(in = al[8], out = dig8);
+	Not(in = al[9], out = dig9);
+	Not(in = al[10], out = dig10);
+	Not(in = al[11], out = dig11);
+	Not(in = al[12], out = dig12);
+	Not(in = al[13], out = dig13);
+	Not(in = al[14], out = dig14);
+
+	Not (in = ah[0], out = dig15);
+	Not (in = ah[1], out = dig16);
+	Not (in = ah[2], out = dig17);
+	Not (in = ah[3], out = dig18);
+	Not (in = ah[4], out = dig19);
+	Not (in = ah[5], out = dig20);
+	Not (in = ah[6], out = dig21);
+	Not (in = ah[7], out = dig22);
+	Not (in = ah[8], out = dig23);
+	Not (in = ah[9], out = dig24);
+	Not (in = ah[10], out = dig25);
+	Not (in = ah[11], out = dig26);
+	Not (in = ah[12], out = dig27);
+	Not (in = ah[13], out = dig28);
+	Not (in = ah[14], out = dig29);
+
+	HalfAdder(a = dig0 , b = true, sum = sl[0], carry = carry0);
+	HalfAdder(a = dig1 , b = carry0, sum = sl[1], carry = carry1);
+	HalfAdder(a = dig2 , b = carry1, sum = sl[2], carry = carry2);
+	HalfAdder(a = dig3 , b = carry2, sum = sl[3], carry = carry3);
+	HalfAdder(a = dig4 , b = carry3, sum = sl[4], carry = carry4);
+	HalfAdder(a = dig5 , b = carry4, sum = sl[5], carry = carry5);
+	HalfAdder(a = dig6 , b = carry5, sum = sl[6], carry = carry6);
+	HalfAdder(a = dig7 , b = carry6, sum = sl[7], carry = carry7);
+	HalfAdder(a = dig8 , b = carry7, sum = sl[8], carry = carry8);
+	HalfAdder(a = dig9 , b = carry8, sum = sl[9], carry = carry9);
+	HalfAdder(a = dig10 , b = carry9, sum = sl[10], carry = carry10);
+	HalfAdder(a = dig11 , b = carry10, sum = sl[11], carry = carry11);
+	HalfAdder(a = dig12 , b = carry11, sum = sl[12], carry = carry12);
+	HalfAdder(a = dig13 , b = carry12, sum = sl[13], carry = carry13);
+	HalfAdder(a = dig14 , b = carry13, sum = sl[14], carry = carry14);
+
+	HalfAdder(a = dig15 , b = carry14, sum = sh[0], carry = carry15);
+	HalfAdder(a = dig16 , b = carry15, sum = sh[1], carry = carry16);
+	HalfAdder(a = dig17 , b = carry16, sum = sh[2], carry = carry17);
+	HalfAdder(a = dig18 , b = carry17, sum = sh[3], carry = carry18);
+	HalfAdder(a = dig19 , b = carry18, sum = sh[4], carry = carry19);
+	HalfAdder(a = dig20 , b = carry19, sum = sh[5], carry = carry20);
+	HalfAdder(a = dig21 , b = carry20, sum = sh[6], carry = carry21);
+	HalfAdder(a = dig22 , b = carry21, sum = sh[7], carry = carry22);
+	HalfAdder(a = dig23 , b = carry22, sum = sh[8], carry = carry23);
+	HalfAdder(a = dig24 , b = carry23, sum = sh[9], carry = carry24);
+	HalfAdder(a = dig25 , b = carry24, sum = sh[10], carry = carry25);
+	HalfAdder(a = dig26 , b = carry25, sum = sh[11], carry = carry26);
+	HalfAdder(a = dig27 , b = carry26, sum = sh[12], carry = carry27);
+	HalfAdder(a = dig28 , b = carry27, sum = sh[13], carry = carry28);
+	HalfAdder(a = dig29 , b = carry28, sum = sh[14], carry = carry29);
+}

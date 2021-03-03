@@ -1,0 +1,30 @@
+program minimoVector;
+
+var
+	vector:Array[0..1000] of Real;
+	cantElementos:Integer;
+	numeroMenor:Real;
+	i:Integer;
+
+begin
+	WriteLn('Digite la cantidad de elemento del vector: ');
+	ReadLn(cantElementos);
+
+	for i:= 1 to cantElementos do
+	begin
+		WriteLn('Digite el elemento ',i,':');
+		ReadLn(vector[i]);
+	end;
+
+	numeroMenor:=vector[1];
+	
+	for i:= 1 to cantElementos do
+	begin
+		if numeroMenor>vector[i] then
+			begin
+				numeroMenor:=vector[i];
+			end
+	end;
+
+	WriteLn('El numero menor es: ',numeroMenor);
+end.

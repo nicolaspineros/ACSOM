@@ -1,0 +1,561 @@
+     Assembly listing for: triangles.mas
+                Assembled: Wed Apr 29 10:34:27 COT 2020
+
+         |                                /Se toman los datos de X y Y de cada punto.
+000 5000 |            INPUT                
+001 2075 |            STORE xa             
+002 5000 |            INPUT                
+003 2076 |            STORE ya             
+004 5000 |            INPUT                
+005 2077 |            STORE xb             
+006 5000 |            INPUT                
+007 2078 |            STORE yb             
+008 5000 |            INPUT                
+009 2079 |            STORE xc             
+00A 5000 |            INPUT                
+00B 207A |            STORE yc             
+         |                                
+         |                                /Se mide la distancia del punto A al punto B.
+00C 1075 |            LOAD xa              
+00D 2098 |            STORE x1             
+00E 1077 |            LOAD xb              
+00F 2099 |            STORE x2             
+010 1076 |            LOAD ya              
+011 209A |            STORE y1             
+012 1078 |            LOAD yb              
+013 209B |            STORE y2             
+014 0086 |            JNS lon              
+015 207B |            STORE lonab          
+         |                                
+         |                                /Se mide la distancia del punto B al punto C.
+016 1077 |            LOAD xb              
+017 2098 |            STORE x1             
+018 1079 |            LOAD xc              
+019 2099 |            STORE x2             
+01A 1078 |            LOAD yb              
+01B 209A |            STORE y1             
+01C 107A |            LOAD yc              
+01D 209B |            STORE y2             
+01E 0086 |            JNS lon              
+01F 207C |            STORE lonbc          
+         |                                
+         |                                /Se mide la distancia del punto C al punto A.
+020 1079 |            LOAD xc              
+021 2098 |            STORE x1             
+022 1075 |            LOAD xa              
+023 2099 |            STORE x2             
+024 107A |            LOAD yc              
+025 209A |            STORE y1             
+026 1076 |            LOAD ya              
+027 209B |            STORE y2             
+028 0086 |            JNS lon              
+029 207D |            STORE lonca          
+         |                                
+         |                                /Se obtiene el angulo de A.
+02A 107C |            LOAD lonbc           
+02B 20C9 |            STORE cosaa          
+02C 107D |            LOAD lonca           
+02D 20CA |            STORE cosab          
+02E 107B |            LOAD lonab           
+02F 20CB |            STORE cosac          
+030 009E |            JNS angulo           
+031 207E |            STORE cosA           
+         |                                
+         |                                /Se obtiene el angulo de B.
+032 107D |            LOAD lonca           
+033 20C9 |            STORE cosaa          
+034 107B |            LOAD lonab           
+035 20CA |            STORE cosab          
+036 107C |            LOAD lonbc           
+037 20CB |            STORE cosac          
+038 009E |            JNS angulo           
+039 207F |            STORE cosB           
+         |                                
+         |                                /Se obtiene el angulo de C.
+03A 107B |            LOAD lonab           
+03B 20C9 |            STORE cosaa          
+03C 107C |            LOAD lonbc           
+03D 20CA |            STORE cosab          
+03E 107D |            LOAD lonca           
+03F 20CB |            STORE cosac          
+040 009E |            JNS angulo           
+041 2080 |            STORE cosC           
+         |                                
+         |                                /Obtiene los datos finales de cada lado.
+042 107E |            LOAD cosA            
+043 3085 |            ADD ten              
+044 8400 |            SKIPCOND 400         
+045 9048 |            JUMP obtA            
+046 1082 |            LOAD oneneg          
+047 9073 |            JUMP end             
+         |                                 
+         |                                /Obtiene datos de A.
+048 107E |  obtA      LOAD cosA            
+049 8000 |            SKIPCOND 000         
+04A 904D |            JUMP recA            
+04B 1083 |            LOAD two             
+04C 9073 |            JUMP end             
+04D 107E |  recA      LOAD cosA            
+04E 8400 |            SKIPCOND 400         
+04F 9052 |            JUMP chkB            
+050 1084 |            LOAD three           
+051 9073 |            JUMP end             
+         |                                
+         |                                /Obtiene datos de B.
+052 107F |  chkB      LOAD cosB            
+053 3085 |            ADD ten              
+054 8400 |            SKIPCOND 400         
+055 9058 |            JUMP obtB            
+056 1082 |            LOAD oneneg          
+057 9073 |            JUMP end             
+058 107F |  obtB      LOAD cosB            
+059 8000 |            SKIPCOND 000         
+05A 905D |            JUMP recB            
+05B 1083 |            LOAD two             
+05C 9073 |            JUMP end             
+05D 107F |  recB      LOAD cosB            
+05E 8400 |            SKIPCOND 400         
+05F 9062 |            JUMP chkC            
+060 1084 |            LOAD three           
+061 9073 |            JUMP end             
+         |                                
+         |                                /Obtiene datos de C.
+062 1080 |  chkC      LOAD cosC            
+063 3085 |            ADD ten              
+064 8400 |            SKIPCOND 400         
+065 9068 |            JUMP obtC            
+066 1082 |            LOAD oneneg          
+067 9073 |            JUMP end             
+068 1080 |  obtC      LOAD cosC            
+069 8000 |            SKIPCOND 000         
+06A 906D |            JUMP recC            
+06B 1083 |            LOAD two             
+06C 9073 |            JUMP end             
+06D 1080 |  recC      LOAD cosC            
+06E 8400 |            SKIPCOND 400         
+06F 9072 |            JUMP acuEnd          
+070 1084 |            LOAD three           
+071 9073 |            JUMP end             
+         |                                
+072 1081 |  acuEnd    LOAD onepos          
+         |                                
+         |                                /Realiza la salida de perimetro correspondiente.
+073 6000 |  end       OUTPUT               
+074 7000 |            HALT                 
+         |                                
+         |                                /Variables principales.
+075 0000 |  xa        DEC 0                
+076 0000 |  ya        DEC 0                
+077 0000 |  xb        DEC 0                
+078 0000 |  yb        DEC 0                
+079 0000 |  xc        DEC 0                
+07A 0000 |  yc        DEC 0                
+07B 0000 |  lonab     DEC 0                
+07C 0000 |  lonbc     DEC 0                
+07D 0000 |  lonca     DEC 0                
+07E 0000 |  cosA      DEC 0                
+07F 0000 |  cosB      DEC 0                
+080 0000 |  cosC      DEC 0                
+081 0001 |  onepos    DEC 1                
+082 FFFF |  oneneg    DEC -1               
+083 0002 |  two       DEC 2                
+084 0003 |  three     DEC 3                
+085 000A |  ten       DEC 10               
+         |                                
+         |                                
+         |                                /Calcula las distancias de un punto a otro punto.
+         |                                /Cuadrado de X.
+086 0000 |  lon       DEC 0                
+087 1099 |            LOAD x2              
+088 4098 |            SUBT x1              
+089 2105 |            STORE xmult          
+08A 2106 |            STORE ymult          
+08B 00D2 |            JNS mult             
+08C 209C |            STORE lonx12         
+         |                                /Cuadrado de Y.
+08D 109B |            LOAD y2              
+08E 409A |            SUBT y1              
+08F 2105 |            STORE xmult          
+090 2106 |            STORE ymult          
+091 00D2 |            JNS mult             
+092 209D |            STORE lony12         
+         |                                /Suma de cuadrados de X y Y.
+093 109C |            LOAD lonx12          
+094 309D |            ADD lony12           
+095 213A |            STORE xraiz          
+096 0117 |            JNS raiz             
+097 C086 |            JUMPI lon            
+         |                                /Variable de lon.
+098 0000 |  x1        DEC 0                
+099 0000 |  x2        DEC 0                
+09A 0000 |  y1        DEC 0                
+09B 0000 |  y2        DEC 0                
+09C 0000 |  lonx12    DEC 0                
+09D 0000 |  lony12    DEC 0                
+         |                                
+         |                                
+         |                                
+         |                                /Calcula el angulo del lado correspondiente.
+09E 0000 |  angulo    DEC 0                
+09F A000 |            CLEAR                
+0A0 20CC |            STORE cosaa2         
+0A1 20CD |            STORE cosab2         
+0A2 20CE |            STORE cosac2         
+0A3 20CF |            STORE cosa2bc        
+         |                                /Calcular el cuadrado de A.
+0A4 10C9 |            LOAD cosaa           
+0A5 2105 |            STORE xmult          
+0A6 2106 |            STORE ymult          
+0A7 00D2 |            JNS mult             
+0A8 20CC |            STORE cosaa2         
+         |                                /Calcular el cuadrado de B.
+0A9 10CA |            LOAD cosab           
+0AA 2105 |            STORE xmult          
+0AB 2106 |            STORE ymult          
+0AC 00D2 |            JNS mult             
+0AD 20CD |            STORE cosab2         
+         |                                /Calcular el cuadrado de C.
+0AE 10CB |            LOAD cosac           
+0AF 2105 |            STORE xmult          
+0B0 2106 |            STORE ymult          
+0B1 00D2 |            JNS mult             
+0B2 20CE |            STORE cosac2         
+         |                                /Calcular el cuadrado de 2BC.
+0B3 10D0 |            LOAD twocosa         
+0B4 2105 |            STORE xmult          
+0B5 10CA |            LOAD cosab           
+0B6 2106 |            STORE ymult          
+0B7 00D2 |            JNS mult             
+0B8 2105 |            STORE xmult          
+0B9 10CB |            LOAD cosac           
+0BA 2106 |            STORE ymult          
+0BB 00D2 |            JNS mult             
+0BC 20CF |            STORE cosa2bc        
+         |                                /Serealiza la division.
+0BD 10CD |            LOAD cosab2          
+0BE 30CE |            ADD cosac2           
+0BF 40CC |            SUBT cosaa2          
+0C0 2105 |            STORE xmult          
+0C1 10D1 |            LOAD tencosa         
+0C2 2106 |            STORE ymult          
+0C3 00D2 |            JNS mult             
+0C4 216F |            STORE xdiv           
+0C5 10CF |            LOAD cosa2bc         
+0C6 2170 |            STORE ydiv           
+0C7 013B |            JNS div              
+0C8 C09E |            JUMPI angulo         
+         |                                /Variables de angulo.
+0C9 0000 |  cosaa     DEC 0                
+0CA 0000 |  cosab     DEC 0                
+0CB 0000 |  cosac     DEC 0                
+0CC 0000 |  cosaa2    DEC 0                
+0CD 0000 |  cosab2    DEC 0                
+0CE 0000 |  cosac2    DEC 0                
+0CF 0000 |  cosa2bc   DEC 0                
+0D0 0002 |  twocosa   DEC 2                
+0D1 000A |  tencosa   DEC 10               
+         |                                
+         |                                
+         |                                
+         |                                /Calcular la multiplicacion entre un dato X y Y.
+0D2 0000 |  mult      DEC 0                
+0D3 A000 |            CLEAR                
+0D4 2107 |            STORE imult          
+0D5 2108 |            STORE summult        
+0D6 2109 |            STORE signomult      
+0D7 1105 |            LOAD xmult           
+0D8 8000 |            SKIPCOND 000         
+0D9 90DD |            JUMP mult2           
+0DA 1109 |            LOAD signomult       
+0DB 310A |            ADD onemult          
+0DC 2109 |            STORE signomult      
+         |                                /Ajusta los datos.
+0DD 1106 |  mult2     LOAD ymult           
+0DE 8000 |            SKIPCOND 000         
+0DF 90E3 |            JUMP start           
+0E0 1109 |            LOAD signomult       
+0E1 310A |            ADD onemult          
+0E2 2109 |            STORE signomult      
+         |                                /Realiza la multiplicacion con abs.
+0E3 1105 |  start     LOAD xmult           
+0E4 2115 |            STORE x              
+0E5 010C |            JNS abs              
+0E6 2105 |            STORE xmult          
+0E7 1106 |            LOAD ymult           
+0E8 2115 |            STORE x              
+0E9 010C |            JNS abs              
+0EA 2106 |            STORE ymult          
+         |                                /Suma la multiplicacion.
+0EB A000 |            CLEAR                
+0EC 2108 |            STORE summult        
+0ED 2107 |            STORE imult          
+0EE 4106 |  while     SUBT ymult           
+0EF 8000 |            SKIPCOND 000         
+0F0 90F8 |            JUMP endwhile        
+0F1 1108 |            LOAD summult         
+0F2 3105 |            ADD xmult            
+0F3 2108 |            STORE summult        
+0F4 1107 |            LOAD imult           
+0F5 310A |            ADD onemult          
+0F6 2107 |            STORE imult          
+0F7 90EE |            JUMP while           
+0F8 1109 |  endwhile  LOAD signomult       
+0F9 8400 |            SKIPCOND 400         
+0FA 90FC |            JUMP check1          
+0FB 9103 |            JUMP return          
+         |                                /Verifica si el producto es negativo.
+0FC 410B |  check1    SUBT twomult         
+0FD 8400 |            SKIPCOND 400         
+0FE 9100 |            JUMP negative        
+0FF 9103 |            JUMP return          
+         |                                /Establece el producto positivo
+100 A000 |  negative  CLEAR                
+101 4108 |            SUBT summult         
+102 2108 |            STORE summult        
+         |                                /Retorna el producto.
+103 1108 |  return    LOAD summult         
+104 C0D2 |            JUMPI mult           
+         |                                /Variables de mult.
+105 0000 |  xmult     DEC 0                
+106 0000 |  ymult     DEC 0                
+107 0000 |  imult     DEC 0                
+108 0000 |  summult   DEC 0                
+109 0000 |  signomult DEC 0                
+10A 0001 |  onemult   DEC 1                
+10B 0002 |  twomult   DEC 2                
+         |                                
+         |                                
+         |                                
+         |                                /Realiza que el dato x sea positivo.
+10C 0000 |  abs       DEC 0                
+10D A000 |            CLEAR                
+10E 2116 |            STORE res            
+10F 1115 |            LOAD x               
+110 8000 |            SKIPCOND 000         
+111 C10C |            JUMPI abs            
+112 1116 |            LOAD res             
+113 4115 |            SUBT x               
+114 C10C |            JUMPI abs            
+         |                                /Variable de abs.
+115 0000 |  x         DEC 0                
+116 0000 |  res       DEC 0                
+         |                                
+         |                                
+         |                                
+         |                                /Se obtiene la raiz cuadrada de X dato.
+117 0000 |  raiz      DEC 0                
+118 1136 |            LOAD oneraiz         
+119 2138 |            STORE iraiz          
+11A 2139 |            STORE resraiz        
+         |                                /Verifica si los csaso anteriores.
+11B 113A |            LOAD xraiz           
+11C 8400 |            SKIPCOND 400         
+11D 911F |            JUMP raiz1           
+11E C117 |            JUMPI raiz           
+11F 4137 |  raiz1     SUBT tenraiz         
+120 8400 |            SKIPCOND 400         
+121 9124 |            JUMP generar         
+122 113A |            LOAD xraiz           
+123 C117 |            JUMPI raiz           
+         |                                /Caso principal.
+124 1139 |  generar   LOAD resraiz         
+125 413A |            SUBT xraiz           
+126 8000 |            SKIPCOND 000         
+127 9129 |            JUMP while2          
+128 912B |            JUMP while3          
+129 8400 |  while2    SKIPCOND 400         
+12A 9133 |            JUMP endwhile2       
+12B 1138 |  while3    LOAD iraiz           
+12C 3136 |            ADD oneraiz          
+12D 2138 |            STORE iraiz          
+12E 2105 |            STORE xmult          
+12F 2106 |            STORE ymult          
+130 00D2 |            JNS mult             
+131 2139 |            STORE resraiz        
+132 9124 |            JUMP generar         
+133 1138 |  endwhile2 LOAD iraiz           
+134 4136 |            SUBT oneraiz         
+135 C117 |            JUMPI raiz           
+         |                                /Variables de raiz.
+136 0001 |  oneraiz   DEC 1                
+137 000A |  tenraiz   DEC 10               
+138 0001 |  iraiz     DEC 1                
+139 0001 |  resraiz   DEC 1                
+13A 0000 |  xraiz     DEC 0                
+         |                                
+         |                                
+         |                                
+13B 0000 |  div       DEC 0                
+13C A000 |            CLEAR                
+13D 2171 |            STORE resdiv         
+13E 2172 |            STORE signodiv       
+         |                                /Verifica si los datos son positivos.
+13F 116F |            LOAD xdiv            
+140 8000 |            SKIPCOND 000         
+141 9145 |            JUMP div2            
+142 1172 |            LOAD signodiv        
+143 3173 |            ADD onediv           
+144 2172 |            STORE signodiv       
+145 1170 |  div2      LOAD ydiv            
+146 8000 |            SKIPCOND 000         
+147 914B |            JUMP rundiv          
+148 1172 |            LOAD signodiv        
+149 3173 |            ADD onediv           
+14A 2172 |            STORE signodiv       
+         |                                /Convierte los datos a posistivos.
+14B 116F |  rundiv    LOAD xdiv            
+14C 2115 |            STORE x              
+14D 010C |            JNS abs              
+14E 216F |            STORE xdiv           
+14F 1170 |            LOAD ydiv            
+150 2115 |            STORE x              
+151 010C |            JNS abs              
+152 2170 |            STORE ydiv           
+         |                                /Realiza la division.
+153 A000 |            CLEAR                
+154 2171 |            STORE resdiv         
+155 116F |            LOAD xdiv            
+156 4170 |  while4    SUBT ydiv            
+157 8800 |            SKIPCOND 800         
+158 915F |            JUMP equals          
+159 216F |  operation STORE xdiv           
+15A 1171 |            LOAD resdiv          
+15B 3173 |            ADD onediv           
+15C 2171 |            STORE resdiv         
+15D 116F |            LOAD xdiv            
+15E 9156 |            JUMP while4          
+15F 8400 |  equals    SKIPCOND 400         
+160 9162 |            JUMP endwhile4       
+161 9159 |            JUMP operation       
+         |                                /Verifica el signo de la division.
+162 1172 |  endwhile4 LOAD signodiv        
+163 8400 |            SKIPCOND 400         
+164 9166 |            JUMP check2          
+165 916D |            JUMP return2         
+         |                                /Verifica si el resultado es negativo.
+166 4174 |  check2    SUBT twodiv          
+167 8400 |            SKIPCOND 400         
+168 916A |            JUMP nagative2       
+169 916D |            JUMP return2         
+         |                                /Establece el resultado positivo.
+16A A000 |  nagative2 CLEAR                
+16B 4171 |            SUBT resdiv          
+16C 2171 |            STORE resdiv         
+         |                                /retorna la division.
+16D 1171 |  return2   LOAD resdiv          
+16E C13B |            JUMPI div            
+         |                                /Variable de div.
+16F 0000 |  xdiv      DEC 0                
+170 0000 |  ydiv      DEC 0                
+171 0000 |  resdiv    DEC 0                
+172 0000 |  signodiv  DEC 0                
+173 0001 |  onediv    DEC 1                
+174 0002 |  twodiv    DEC 2                
+
+Assembly successful.
+
+         SYMBOL TABLE
+         -----------------------------------------------------
+          Symbol    | Defined | References 
+         -----------+---------+-------------------------------
+          abs       |   10C   | 0E5, 0E9, 111, 114, 14D, 151
+          acuEnd    |   072   | 06F
+          angulo    |   09E   | 030, 038, 040, 0C8
+          check1    |   0FC   | 0FA
+          check2    |   166   | 164
+          chkB      |   052   | 04F
+          chkC      |   062   | 05F
+          cosA      |   07E   | 031, 042, 048, 04D
+          cosB      |   07F   | 039, 052, 058, 05D
+          cosC      |   080   | 041, 062, 068, 06D
+          cosa2bc   |   0CF   | 0A3, 0BC, 0C5
+          cosaa     |   0C9   | 02B, 033, 03B, 0A4
+          cosaa2    |   0CC   | 0A0, 0A8, 0BF
+          cosab     |   0CA   | 02D, 035, 03D, 0A9, 0B5
+          cosab2    |   0CD   | 0A1, 0AD, 0BD
+          cosac     |   0CB   | 02F, 037, 03F, 0AE, 0B9
+          cosac2    |   0CE   | 0A2, 0B2, 0BE
+          div       |   13B   | 0C7, 16E
+          div2      |   145   | 141
+          end       |   073   | 047, 04C, 051, 057, 05C, 061, 
+                    |         | 067, 06C, 071
+          endwhile  |   0F8   | 0F0
+          endwhile2 |   133   | 12A
+          endwhile4 |   162   | 160
+          equals    |   15F   | 158
+          generar   |   124   | 121, 132
+          imult     |   107   | 0D4, 0ED, 0F4, 0F6
+          iraiz     |   138   | 119, 12B, 12D, 133
+          lon       |   086   | 014, 01E, 028, 097
+          lonab     |   07B   | 015, 02E, 034, 03A
+          lonbc     |   07C   | 01F, 02A, 036, 03C
+          lonca     |   07D   | 029, 02C, 032, 03E
+          lonx12    |   09C   | 08C, 093
+          lony12    |   09D   | 092, 094
+          mult      |   0D2   | 08B, 091, 0A7, 0AC, 0B1, 0B7, 
+                    |         | 0BB, 0C3, 104, 130
+          mult2     |   0DD   | 0D9
+          nagative2 |   16A   | 168
+          negative  |   100   | 0FE
+          obtA      |   048   | 045
+          obtB      |   058   | 055
+          obtC      |   068   | 065
+          onediv    |   173   | 143, 149, 15B
+          onemult   |   10A   | 0DB, 0E1, 0F5
+          oneneg    |   082   | 046, 056, 066
+          onepos    |   081   | 072
+          oneraiz   |   136   | 118, 12C, 134
+          operation |   159   | 161
+          raiz      |   117   | 096, 11E, 123, 135
+          raiz1     |   11F   | 11D
+          recA      |   04D   | 04A
+          recB      |   05D   | 05A
+          recC      |   06D   | 06A
+          res       |   116   | 10E, 112
+          resdiv    |   171   | 13D, 154, 15A, 15C, 16B, 16C, 
+                    |         | 16D
+          resraiz   |   139   | 11A, 124, 131
+          return    |   103   | 0FB, 0FF
+          return2   |   16D   | 165, 169
+          rundiv    |   14B   | 147
+          signodiv  |   172   | 13E, 142, 144, 148, 14A, 162
+          signomult |   109   | 0D6, 0DA, 0DC, 0E0, 0E2, 0F8
+          start     |   0E3   | 0DF
+          summult   |   108   | 0D5, 0EC, 0F1, 0F3, 101, 102, 
+                    |         | 103
+          ten       |   085   | 043, 053, 063
+          tencosa   |   0D1   | 0C1
+          tenraiz   |   137   | 11F
+          three     |   084   | 050, 060, 070
+          two       |   083   | 04B, 05B, 06B
+          twocosa   |   0D0   | 0B3
+          twodiv    |   174   | 166
+          twomult   |   10B   | 0FC
+          while     |   0EE   | 0F7
+          while2    |   129   | 127
+          while3    |   12B   | 128
+          while4    |   156   | 15E
+          x         |   115   | 0E4, 0E8, 10F, 113, 14C, 150
+          x1        |   098   | 00D, 017, 021, 088
+          x2        |   099   | 00F, 019, 023, 087
+          xa        |   075   | 001, 00C, 022
+          xb        |   077   | 005, 00E, 016
+          xc        |   079   | 009, 018, 020
+          xdiv      |   16F   | 0C4, 13F, 14B, 14E, 155, 159, 
+                    |         | 15D
+          xmult     |   105   | 089, 08F, 0A5, 0AA, 0AF, 0B4, 
+                    |         | 0B8, 0C0, 0D7, 0E3, 0E6, 0F2, 
+                    |         | 12E
+          xraiz     |   13A   | 095, 11B, 122, 125
+          y1        |   09A   | 011, 01B, 025, 08E
+          y2        |   09B   | 013, 01D, 027, 08D
+          ya        |   076   | 003, 010, 026
+          yb        |   078   | 007, 012, 01A
+          yc        |   07A   | 00B, 01C, 024
+          ydiv      |   170   | 0C6, 145, 14F, 152, 156
+          ymult     |   106   | 08A, 090, 0A6, 0AB, 0B0, 0B6, 
+                    |         | 0BA, 0C2, 0DD, 0E7, 0EA, 0EE, 
+                    |         | 12F
+         -----------------------------------------------------
+
+

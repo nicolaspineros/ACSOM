@@ -1,0 +1,42 @@
+//Resta de Numeros Complementarios - Miguel Ángel Rodríguez Siachoque - 2132211
+// Trabajo realizado con colaboraciones de los compañeros Carlos Amorocho Amorocho y Daniela Ruíz.
+
+CHIP RestaComplemento {
+	IN ah[15], al[15], bh[15], bl[15];
+	OUT sh[15], sl[15];
+	
+	PARTS:
+	NumComplemento(ah = bh, al = bl, sh[0] = bsh0, sh[1] = bsh1, sh[2] = bsh2, sh[3] = bsh3, sh[4] = bsh4, sh[5] = bsh5, sh[6] = bsh6, sh[7] = bsh7, sh[8] = bsh8, sh[9] = bsh9, sh[10] = bsh10, sh[11] = bsh11, sh[12] = bsh12, sh[13] = bsh13, sh[14] = bsh14, sl[0] = bsl0, sl[1] = bsl1, sl[2] = bsl2, sl[3] = bsl3, sl[4] = bsl4, sl[5] = bsl5, sl[6] = bsl6, sl[7] = bsl7, sl[8] = bsl8, sl[9] = bsl9, sl[10] = bsl10, sl[11] = bsl11, sl[12] = bsl12, sl[13] = bsl13, sl[14] = bsl14);
+
+	FullAdder (a = al[0], b = bsl0, c = false, sum = sl[0], carry = carry0);
+	FullAdder (a = al[1], b = bsl1, c = carry0, sum = sl[1], carry = carry1);
+	FullAdder (a = al[2], b = bsl2, c = carry1, sum = sl[2], carry = carry2);
+	FullAdder (a = al[3], b = bsl3, c = carry2, sum = sl[3], carry = carry3);
+	FullAdder (a = al[4], b = bsl4, c = carry3, sum = sl[4], carry = carry4);
+	FullAdder (a = al[5], b = bsl5, c = carry4, sum = sl[5], carry = carry5);
+	FullAdder (a = al[6], b = bsl6, c = carry5, sum = sl[6], carry = carry6);
+	FullAdder (a = al[7], b = bsl7, c = carry6, sum = sl[7], carry = carry7);
+	FullAdder (a = al[8], b = bsl8, c = carry7, sum = sl[8], carry = carry8);
+	FullAdder (a = al[9], b = bsl9, c = carry8, sum = sl[9], carry = carry9);
+	FullAdder (a = al[10], b = bsl10, c = carry9, sum = sl[10], carry = carry10);
+	FullAdder (a = al[11], b = bsl11, c = carry10, sum = sl[11], carry = carry11);
+	FullAdder (a = al[12], b = bsl12, c = carry11, sum = sl[12], carry = carry12);
+	FullAdder (a = al[13], b = bsl13, c = carry12, sum = sl[13], carry = carry13);
+	FullAdder (a = al[14], b = bsl14, c = carry13, sum = sl[14], carry = carry14);
+
+	FullAdder (a = ah[0], b = bsh0, c = carry14, sum = sh[0], carry = carry15);
+	FullAdder (a = ah[1], b = bsh1, c = carry15, sum = sh[1], carry = carry16);
+	FullAdder (a = ah[2], b = bsh2, c = carry16, sum = sh[2], carry = carry17);
+	FullAdder (a = ah[3], b = bsh3, c = carry17, sum = sh[3], carry = carry18);
+	FullAdder (a = ah[4], b = bsh4, c = carry18, sum = sh[4], carry = carry19);
+	FullAdder (a = ah[5], b = bsh5, c = carry19, sum = sh[5], carry = carry20);
+	FullAdder (a = ah[6], b = bsh6, c = carry20, sum = sh[6], carry = carry21);
+	FullAdder (a = ah[7], b = bsh7, c = carry21, sum = sh[7], carry = carry22);
+	FullAdder (a = ah[8], b = bsh8, c = carry22, sum = sh[8], carry = carry23);
+	FullAdder (a = ah[9], b = bsh9, c = carry23, sum = sh[9], carry = carry24);
+	FullAdder (a = ah[10], b = bsh10, c = carry24, sum = sh[10], carry = carry25);
+	FullAdder (a = ah[11], b = bsh11, c = carry25, sum = sh[11], carry = carry26);
+	FullAdder (a = ah[12], b = bsh12, c = carry26, sum = sh[12], carry = carry27);
+	FullAdder (a = ah[13], b = bsh13, c = carry27, sum = sh[13], carry = carry28);
+	FullAdder (a = ah[14], b = bsh14, c = carry28, sum = sh[14], carry = carry29);
+}

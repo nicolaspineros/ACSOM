@@ -1,0 +1,555 @@
+     Assembly listing for: triangles.mas
+                Assembled: Fri Dec 06 10:37:02 COT 2019
+
+000 5000 |             INPUT                /Entrada
+001 207A |             STORE xa              
+002 5000 |             INPUT                 
+003 207B |             STORE ya              
+004 5000 |             INPUT                 
+005 207C |             STORE xb              
+006 5000 |             INPUT                 
+007 207D |             STORE yb              
+008 5000 |             INPUT                 
+009 207E |             STORE xc              
+00A 5000 |             INPUT                 
+00B 207F |             STORE yc              
+         |                                  
+00C 107A |             LOAD xa              /Distancia a-b
+00D 2098 |             STORE dist_x1         
+00E 107C |             LOAD xb               
+00F 2099 |             STORE dist_x2         
+010 107B |             LOAD ya               
+011 209A |             STORE dist_y1         
+012 107D |             LOAD yb               
+013 209B |             STORE dist_y2         
+014 0086 |             JNS dist              
+         |                                              /output
+015 2080 |             STORE disab           
+         |                                  
+016 107C |             LOAD xb              /Distancia b-c
+017 2098 |             STORE dist_x1         
+018 107E |             LOAD xc               
+019 2099 |             STORE dist_x2         
+01A 107D |             LOAD yb               
+01B 209A |             STORE dist_y1         
+01C 107F |             LOAD yc               
+01D 209B |             STORE dist_y2         
+01E 0086 |             JNS dist              
+         |                                              /output
+01F 2081 |             STORE disbc           
+         |                                  
+020 107E |             LOAD xc              /Distancia c-a
+021 2098 |             STORE dist_x1         
+022 107A |             LOAD xa               
+023 2099 |             STORE dist_x2         
+024 107F |             LOAD yc               
+025 209A |             STORE dist_y1         
+026 107B |             LOAD ya               
+027 209B |             STORE dist_y2         
+028 0086 |             JNS dist              
+         |                                              /output
+029 2082 |             STORE disca           
+         |                                  
+02A 1081 |             LOAD disbc           /Cos del angulo A
+02B 20C9 |             STORE cosa_a          
+02C 1082 |             LOAD disca            
+02D 20CA |             STORE cosa_b          
+02E 1080 |             LOAD disab            
+02F 20CB |             STORE cosa_c          
+030 009E |             JNS cosang            
+         |                                              /output
+031 2083 |             STORE cosA            
+         |                                  
+032 1082 |             LOAD disca           /Cos del angulo B
+033 20C9 |             STORE cosa_a          
+034 1080 |             LOAD disab            
+035 20CA |             STORE cosa_b          
+036 1081 |             LOAD disbc            
+037 20CB |             STORE cosa_c          
+038 009E |             JNS cosang            
+         |                                              /output
+039 2084 |             STORE cosB            
+         |                                  
+03A 1080 |             LOAD disab           /Cos del angulo C
+03B 20C9 |             STORE cosa_a          
+03C 1081 |             LOAD disbc            
+03D 20CA |             STORE cosa_b          
+03E 1082 |             LOAD disca            
+03F 20CB |             STORE cosa_c          
+040 009E |             JNS cosang            
+         |                                              /output
+041 2085 |             STORE cosC            
+         |                                  
+042 1083 |             LOAD cosA             
+043 3079 |             ADD ten               
+044 8400 |             SKIPCOND 400          
+045 9048 |             JUMP obtA             
+046 1076 |             LOAD one_neg          
+047 9073 |             JUMP end              
+048 1083 |  obtA       LOAD cosA             
+049 8000 |             SKIPCOND 000          
+04A 904D |             JUMP recA             
+04B 1077 |             LOAD two              
+04C 9073 |             JUMP end              
+04D 1083 |  recA       LOAD cosA             
+04E 8400 |             SKIPCOND 400          
+04F 9052 |             JUMP chkB             
+050 1078 |             LOAD three            
+051 9073 |             JUMP end              
+         |                                  
+052 1084 |  chkB       LOAD cosB             
+053 3079 |             ADD ten               
+054 8400 |             SKIPCOND 400          
+055 9058 |             JUMP obtB             
+056 1076 |             LOAD one_neg          
+057 9073 |             JUMP end              
+058 1084 |  obtB       LOAD cosB             
+059 8000 |             SKIPCOND 000          
+05A 905D |             JUMP recB             
+05B 1077 |             LOAD two              
+05C 9073 |             JUMP end              
+05D 1084 |  recB       LOAD cosB             
+05E 8400 |             SKIPCOND 400          
+05F 9062 |             JUMP chkC             
+060 1078 |             LOAD three            
+061 9073 |             JUMP end              
+         |                                  
+062 1085 |  chkC       LOAD cosC             
+063 3079 |             ADD ten               
+064 8400 |             SKIPCOND 400          
+065 9068 |             JUMP obtC             
+066 1076 |             LOAD one_neg          
+067 9073 |             JUMP end              
+068 1085 |  obtC       LOAD cosC             
+069 8000 |             SKIPCOND 000          
+06A 906D |             JUMP recC             
+06B 1077 |             LOAD two              
+06C 9073 |             JUMP end              
+06D 1085 |  recC       LOAD cosC             
+06E 8400 |             SKIPCOND 400          
+06F 9072 |             JUMP acuEnd           
+070 1078 |             LOAD three            
+071 9073 |             JUMP end              
+         |                                  
+072 1075 |  acuEnd     LOAD one              
+         |                                  
+073 6000 |  end        OUTPUT                
+074 7000 |             HALT                  
+         |                                  
+075 0001 |  one        DEC 1                 
+076 FFFF |  one_neg    DEC -1                
+077 0002 |  two        DEC 2                 
+078 0003 |  three      DEC 3                 
+079 000A |  ten        DEC 10                
+         |                                  
+07A 0000 |  xa         DEC 0                 
+07B 0000 |  ya         DEC 0                 
+07C 0000 |  xb         DEC 0                 
+07D 0000 |  yb         DEC 0                 
+07E 0000 |  xc         DEC 0                 
+07F 0000 |  yc         DEC 0                 
+080 0000 |  disab      DEC 0                 
+081 0000 |  disbc      DEC 0                 
+082 0000 |  disca      DEC 0                 
+083 0000 |  cosA       DEC 0                 
+084 0000 |  cosB       DEC 0                 
+085 0000 |  cosC       DEC 0                 
+         |                                  
+         |                                  / Si algún ángulo es = a 180° no hay triángulo (cos a = -1) (-1)
+         |                                  / Si algún ángulo es > a 90°, es Obtusángulo (Cos a < 0) (2)
+         |                                  / Si algún ángulo es = a 90°, es Rectángulo (Cos a = 0) (3)
+         |                                  / Si todos los ángulos son < a 90°, es Acutángulo (Cos a > 0) (1)
+         |                                  
+         |                                  / Calcular las distancias entre los puntos (a, b, c)
+086 0000 |  dist       DEC 0                 
+087 1099 |             LOAD dist_x2         /(x2-x1)**2
+088 4098 |             SUBT dist_x1          
+089 2129 |             STORE mult_x          
+08A 212A |             STORE mult_y          
+08B 00F6 |             JNS mult              
+08C 209C |             STORE dist_c1         
+         |                                  
+08D 109B |             LOAD dist_y2         /(y2-y1)**2
+08E 409A |             SUBT dist_y1          
+08F 2129 |             STORE mult_x          
+090 212A |             STORE mult_y          
+091 00F6 |             JNS mult              
+092 209D |             STORE dist_c2         
+         |                                  
+093 109C |             LOAD dist_c1         /sqrt(c1 + c2)
+094 309D |             ADD dist_c2           
+095 20F5 |             STORE sq_x            
+096 00D2 |             JNS sqroot            
+097 C086 |             JUMPI dist            
+         |                                  
+098 0000 |  dist_x1    DEC 0                 
+099 0000 |  dist_x2    DEC 0                 
+09A 0000 |  dist_y1    DEC 0                 
+09B 0000 |  dist_y2    DEC 0                 
+09C 0000 |  dist_c1    DEC 0                 
+09D 0000 |  dist_c2    DEC 0                 
+         |                                  
+         |                                  
+         |                                  
+         |                                  / Calcular el coseno cada ángulo (A, B, C)
+09E 0000 |  cosang     DEC 0                 
+09F A000 |             CLEAR                 
+0A0 20CC |             STORE cosa_asq        
+0A1 20CD |             STORE cosa_bsq        
+0A2 20CE |             STORE cosa_csq        
+0A3 20CF |             STORE cosa_twobc      
+         |                                  
+0A4 10C9 |             LOAD cosa_a          /Calcular a**2
+0A5 2129 |             STORE mult_x          
+0A6 212A |             STORE mult_y          
+0A7 00F6 |             JNS mult              
+0A8 20CC |             STORE cosa_asq        
+         |                                  
+0A9 10CA |             LOAD cosa_b          /Calcular b**2
+0AA 2129 |             STORE mult_x          
+0AB 212A |             STORE mult_y          
+0AC 00F6 |             JNS mult              
+0AD 20CD |             STORE cosa_bsq        
+         |                                  
+0AE 10CB |             LOAD cosa_c          /Calcular c**2
+0AF 2129 |             STORE mult_x          
+0B0 212A |             STORE mult_y          
+0B1 00F6 |             JNS mult              
+0B2 20CE |             STORE cosa_csq        
+         |                                  
+0B3 10D0 |             LOAD cosa_two        /Calcular 2bc
+0B4 2129 |             STORE mult_x          
+0B5 10CA |             LOAD cosa_b           
+0B6 212A |             STORE mult_y          
+0B7 00F6 |             JNS mult              
+0B8 2129 |             STORE mult_x          
+0B9 10CB |             LOAD cosa_c           
+0BA 212A |             STORE mult_y          
+0BB 00F6 |             JNS mult              
+0BC 20CF |             STORE cosa_twobc      
+         |                                  
+0BD 10CD |             LOAD cosa_bsq        /Realizar la division
+0BE 30CE |             ADD cosa_csq          
+0BF 40CC |             SUBT cosa_asq         
+0C0 2129 |             STORE mult_x          
+0C1 10D1 |             LOAD cosa_ten         
+0C2 212A |             STORE mult_y          
+0C3 00F6 |             JNS mult              
+0C4 2164 |             STORE div_x           
+0C5 10CF |             LOAD cosa_twobc       
+0C6 2165 |             STORE div_y           
+0C7 0130 |             JNS div               
+0C8 C09E |             JUMPI cosang          
+         |                                  
+0C9 0000 |  cosa_a     DEC 0                 
+0CA 0000 |  cosa_b     DEC 0                 
+0CB 0000 |  cosa_c     DEC 0                 
+0CC 0000 |  cosa_asq   DEC 0                 
+0CD 0000 |  cosa_bsq   DEC 0                 
+0CE 0000 |  cosa_csq   DEC 0                 
+0CF 0000 |  cosa_twobc DEC 0                 
+0D0 0002 |  cosa_two   DEC 2                 
+0D1 000A |  cosa_ten   DEC 10                
+         |                                  
+         |                                  
+         |                                  
+         |                                  /libs
+0D2 0000 |  sqroot     DEC 0                 
+0D3 10F1 |             LOAD sq_one           
+0D4 20F3 |             STORE sq_i            
+0D5 20F4 |             STORE sq_result       
+         |                                  
+0D6 10F5 |             LOAD sq_x             
+0D7 8400 |             SKIPCOND 400         /Verificar casos base
+0D8 90DA |             JUMP sq_eqone         
+0D9 C0D2 |             JUMPI sqroot          
+0DA 40F2 |  sq_eqone   SUBT sq_ten           
+0DB 8400 |             SKIPCOND 400          
+0DC 90DF |             JUMP sq_gen           
+0DD 10F5 |             LOAD sq_x             
+0DE C0D2 |             JUMPI sqroot          
+         |                                  
+0DF 10F4 |  sq_gen     LOAD sq_result       /Caso general
+0E0 40F5 |             SUBT sq_x             
+0E1 8000 |             SKIPCOND 000          
+0E2 90E4 |             JUMP sq_eqwh          
+0E3 90E6 |             JUMP sq_wh            
+0E4 8400 |  sq_eqwh    SKIPCOND 400          
+0E5 90EE |             JUMP sq_endwh         
+0E6 10F3 |  sq_wh      LOAD sq_i             
+0E7 30F1 |             ADD sq_one            
+0E8 20F3 |             STORE sq_i            
+0E9 2129 |             STORE mult_x          
+0EA 212A |             STORE mult_y          
+0EB 00F6 |             JNS mult              
+0EC 20F4 |             STORE sq_result       
+0ED 90DF |             JUMP sq_gen           
+0EE 10F3 |  sq_endwh   LOAD sq_i             
+0EF 40F1 |             SUBT sq_one           
+0F0 C0D2 |             JUMPI sqroot          
+         |                                  
+0F1 0001 |  sq_one     DEC 1                 
+0F2 000A |  sq_ten     DEC 10                
+0F3 0001 |  sq_i       DEC 1                 
+0F4 0001 |  sq_result  DEC 1                 
+0F5 0000 |  sq_x       DEC 0                 
+         |                                  
+         |                                  
+         |                                  
+0F6 0000 |  mult       DEC 0                 
+0F7 A000 |             CLEAR                 
+0F8 212B |             STORE mult_i          
+0F9 212C |             STORE mult_sum        
+0FA 212D |             STORE mult_signo      
+         |                                  
+0FB 1129 |             LOAD mult_x          /Check signos
+0FC 8000 |             SKIPCOND 000          
+0FD 9101 |             JUMP m_second         
+0FE 112D |             LOAD mult_signo       
+0FF 312E |             ADD mult_one          
+100 212D |             STORE mult_signo      
+101 112A |  m_second   LOAD mult_y           
+102 8000 |             SKIPCOND 000          
+103 9107 |             JUMP m_start          
+104 112D |             LOAD mult_signo       
+105 312E |             ADD mult_one          
+106 212D |             STORE mult_signo      
+         |                                  
+107 1129 |  m_start    LOAD mult_x          /Convertirlos en positivos
+108 2173 |             STORE abs_x           
+109 016A |             JNS abs               
+10A 2129 |             STORE mult_x          
+10B 112A |             LOAD mult_y           
+10C 2173 |             STORE abs_x           
+10D 016A |             JNS abs               
+10E 212A |             STORE mult_y          
+         |                                  
+10F A000 |             CLEAR                 
+110 212C |             STORE mult_sum        
+111 212B |             STORE mult_i          
+112 412A |  m_while    SUBT mult_y           
+113 8000 |             SKIPCOND 000          
+114 911C |             JUMP m_endwhile       
+115 112C |             LOAD mult_sum         
+116 3129 |             ADD mult_x            
+117 212C |             STORE mult_sum        
+118 112B |             LOAD mult_i           
+119 312E |             ADD mult_one          
+11A 212B |             STORE mult_i          
+11B 9112 |             JUMP m_while          
+         |                                  
+11C 112D |  m_endwhile LOAD mult_signo      /Verificar el signo final de la multiplicacion
+11D 8400 |             SKIPCOND 400          
+11E 9120 |             JUMP m_checktwo       
+11F 9127 |             JUMP m_return         
+120 412F |  m_checktwo SUBT mult_two         
+121 8400 |             SKIPCOND 400          
+122 9124 |             JUMP m_negate         
+123 9127 |             JUMP m_return         
+         |                                  
+124 A000 |  m_negate   CLEAR                 
+125 412C |             SUBT mult_sum         
+126 212C |             STORE mult_sum        
+         |                                  
+127 112C |  m_return   LOAD mult_sum         
+128 C0F6 |             JUMPI mult            
+         |                                  
+129 0000 |  mult_x     DEC 0                 
+12A 0000 |  mult_y     DEC 0                 
+12B 0000 |  mult_i     DEC 0                 
+12C 0000 |  mult_sum   DEC 0                 
+12D 0000 |  mult_signo DEC 0                 
+12E 0001 |  mult_one   DEC 1                 
+12F 0002 |  mult_two   DEC 2                 
+         |                                  
+         |                                  
+         |                                  
+130 0000 |  div        DEC 0                 
+131 A000 |             CLEAR                 
+132 2166 |             STORE div_result      
+133 2167 |             STORE div_signo       
+         |                                  
+134 1164 |             LOAD div_x           /Check signos
+135 8000 |             SKIPCOND 000          
+136 913A |             JUMP d_second         
+137 1167 |             LOAD div_signo        
+138 3168 |             ADD div_one           
+139 2167 |             STORE div_signo       
+13A 1165 |  d_second   LOAD div_y            
+13B 8000 |             SKIPCOND 000          
+13C 9140 |             JUMP d_start          
+13D 1167 |             LOAD div_signo        
+13E 3168 |             ADD div_one           
+13F 2167 |             STORE div_signo       
+         |                                  
+140 1164 |  d_start    LOAD div_x           /Convertirlos en positivos
+141 2173 |             STORE abs_x           
+142 016A |             JNS abs               
+143 2164 |             STORE div_x           
+144 1165 |             LOAD div_y            
+145 2173 |             STORE abs_x           
+146 016A |             JNS abs               
+147 2165 |             STORE div_y           
+         |                                  
+148 A000 |             CLEAR                /Iniciar la division 
+149 2166 |             STORE div_result      
+14A 1164 |             LOAD div_x            
+14B 4165 |  d_while    SUBT div_y            
+14C 8800 |             SKIPCOND 800          
+14D 9154 |             JUMP equals           
+14E 2164 |  operation  STORE div_x           
+14F 1166 |             LOAD div_result       
+150 3168 |             ADD div_one           
+151 2166 |             STORE div_result      
+152 1164 |             LOAD div_x            
+153 914B |             JUMP d_while          
+154 8400 |  equals     SKIPCOND 400          
+155 9157 |             JUMP d_endwhile       
+156 914E |             JUMP operation        
+         |                                  
+157 1167 |  d_endwhile LOAD div_signo       /Verificar el signo final de la division
+158 8400 |             SKIPCOND 400          
+159 915B |             JUMP d_checktwo       
+15A 9162 |             JUMP d_return         
+15B 4169 |  d_checktwo SUBT div_two          
+15C 8400 |             SKIPCOND 400          
+15D 915F |             JUMP d_negate         
+15E 9162 |             JUMP d_return         
+         |                                  
+15F A000 |  d_negate   CLEAR                 
+160 4166 |             SUBT div_result       
+161 2166 |             STORE div_result      
+         |                                  
+162 1166 |  d_return   LOAD div_result       
+163 C130 |             JUMPI div             
+         |                                              
+164 0000 |  div_x      DEC 0                 
+165 0000 |  div_y      DEC 0                 
+166 0000 |  div_result DEC 0                 
+167 0000 |  div_signo  DEC 0                 
+168 0001 |  div_one    DEC 1                 
+169 0002 |  div_two    DEC 2                 
+         |                                  
+         |                                  
+         |                                  
+16A 0000 |  abs        DEC 0                 
+16B A000 |             CLEAR                 
+16C 2174 |             STORE abs_res         
+         |                                  
+16D 1173 |             LOAD abs_x            
+16E 8000 |             SKIPCOND 000          
+16F C16A |             JUMPI abs             
+170 1174 |             LOAD abs_res          
+171 4173 |             SUBT abs_x            
+172 C16A |             JUMPI abs             
+         |                                  
+173 0000 |  abs_x      DEC 0                 
+174 0000 |  abs_res    DEC 0                 
+
+Assembly successful.
+
+         SYMBOL TABLE
+         ------------------------------------------------------
+          Symbol     | Defined | References 
+         ------------+---------+-------------------------------
+          abs        |   16A   | 109, 10D, 142, 146, 16F, 172
+          abs_res    |   174   | 16C, 170
+          abs_x      |   173   | 108, 10C, 141, 145, 16D, 171
+          acuEnd     |   072   | 06F
+          chkB       |   052   | 04F
+          chkC       |   062   | 05F
+          cosA       |   083   | 031, 042, 048, 04D
+          cosB       |   084   | 039, 052, 058, 05D
+          cosC       |   085   | 041, 062, 068, 06D
+          cosa_a     |   0C9   | 02B, 033, 03B, 0A4
+          cosa_asq   |   0CC   | 0A0, 0A8, 0BF
+          cosa_b     |   0CA   | 02D, 035, 03D, 0A9, 0B5
+          cosa_bsq   |   0CD   | 0A1, 0AD, 0BD
+          cosa_c     |   0CB   | 02F, 037, 03F, 0AE, 0B9
+          cosa_csq   |   0CE   | 0A2, 0B2, 0BE
+          cosa_ten   |   0D1   | 0C1
+          cosa_two   |   0D0   | 0B3
+          cosa_twobc |   0CF   | 0A3, 0BC, 0C5
+          cosang     |   09E   | 030, 038, 040, 0C8
+          d_checktwo |   15B   | 159
+          d_endwhile |   157   | 155
+          d_negate   |   15F   | 15D
+          d_return   |   162   | 15A, 15E
+          d_second   |   13A   | 136
+          d_start    |   140   | 13C
+          d_while    |   14B   | 153
+          disab      |   080   | 015, 02E, 034, 03A
+          disbc      |   081   | 01F, 02A, 036, 03C
+          disca      |   082   | 029, 02C, 032, 03E
+          dist       |   086   | 014, 01E, 028, 097
+          dist_c1    |   09C   | 08C, 093
+          dist_c2    |   09D   | 092, 094
+          dist_x1    |   098   | 00D, 017, 021, 088
+          dist_x2    |   099   | 00F, 019, 023, 087
+          dist_y1    |   09A   | 011, 01B, 025, 08E
+          dist_y2    |   09B   | 013, 01D, 027, 08D
+          div        |   130   | 0C7, 163
+          div_one    |   168   | 138, 13E, 150
+          div_result |   166   | 132, 149, 14F, 151, 160, 161, 
+                     |         | 162
+          div_signo  |   167   | 133, 137, 139, 13D, 13F, 157
+          div_two    |   169   | 15B
+          div_x      |   164   | 0C4, 134, 140, 143, 14A, 14E, 
+                     |         | 152
+          div_y      |   165   | 0C6, 13A, 144, 147, 14B
+          end        |   073   | 047, 04C, 051, 057, 05C, 061, 
+                     |         | 067, 06C, 071
+          equals     |   154   | 14D
+          m_checktwo |   120   | 11E
+          m_endwhile |   11C   | 114
+          m_negate   |   124   | 122
+          m_return   |   127   | 11F, 123
+          m_second   |   101   | 0FD
+          m_start    |   107   | 103
+          m_while    |   112   | 11B
+          mult       |   0F6   | 08B, 091, 0A7, 0AC, 0B1, 0B7, 
+                     |         | 0BB, 0C3, 0EB, 128
+          mult_i     |   12B   | 0F8, 111, 118, 11A
+          mult_one   |   12E   | 0FF, 105, 119
+          mult_signo |   12D   | 0FA, 0FE, 100, 104, 106, 11C
+          mult_sum   |   12C   | 0F9, 110, 115, 117, 125, 126, 
+                     |         | 127
+          mult_two   |   12F   | 120
+          mult_x     |   129   | 089, 08F, 0A5, 0AA, 0AF, 0B4, 
+                     |         | 0B8, 0C0, 0E9, 0FB, 107, 10A, 
+                     |         | 116
+          mult_y     |   12A   | 08A, 090, 0A6, 0AB, 0B0, 0B6, 
+                     |         | 0BA, 0C2, 0EA, 101, 10B, 10E, 
+                     |         | 112
+          obtA       |   048   | 045
+          obtB       |   058   | 055
+          obtC       |   068   | 065
+          one        |   075   | 072
+          one_neg    |   076   | 046, 056, 066
+          operation  |   14E   | 156
+          recA       |   04D   | 04A
+          recB       |   05D   | 05A
+          recC       |   06D   | 06A
+          sq_endwh   |   0EE   | 0E5
+          sq_eqone   |   0DA   | 0D8
+          sq_eqwh    |   0E4   | 0E2
+          sq_gen     |   0DF   | 0DC, 0ED
+          sq_i       |   0F3   | 0D4, 0E6, 0E8, 0EE
+          sq_one     |   0F1   | 0D3, 0E7, 0EF
+          sq_result  |   0F4   | 0D5, 0DF, 0EC
+          sq_ten     |   0F2   | 0DA
+          sq_wh      |   0E6   | 0E3
+          sq_x       |   0F5   | 095, 0D6, 0DD, 0E0
+          sqroot     |   0D2   | 096, 0D9, 0DE, 0F0
+          ten        |   079   | 043, 053, 063
+          three      |   078   | 050, 060, 070
+          two        |   077   | 04B, 05B, 06B
+          xa         |   07A   | 001, 00C, 022
+          xb         |   07C   | 005, 00E, 016
+          xc         |   07E   | 009, 018, 020
+          ya         |   07B   | 003, 010, 026
+          yb         |   07D   | 007, 012, 01A
+          yc         |   07F   | 00B, 01C, 024
+         ------------------------------------------------------
+
+

@@ -1,0 +1,13 @@
+program suma;
+var
+	x:Integer;
+	y:Integer;
+	z:Integer;
+begin
+	WriteLn('Numero X: ');
+	ReadLn(x);
+	WriteLn('Numero Y: ');
+	ReadLn(y);
+	z:=x+y;
+	WriteLn('El resultado de la suma es: ',z);
+end.

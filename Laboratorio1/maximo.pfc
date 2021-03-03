@@ -1,0 +1,24 @@
+program maximo;
+
+var
+	x:Real;
+	y:Real;
+
+begin
+	WriteLn('Numero X: ');
+	ReadLn(x);
+	WriteLn('Numero Y: ');
+	ReadLn(y);
+	if x>y then
+		begin
+			WriteLn('El numero maximo es X: ',x);
+		end
+	else if y>x then
+		begin
+			WriteLn('El numero maximo es Y: ',y);
+		end
+	else
+		begin
+			WriteLn('Ambos numeros son iguales: ',x);
+		end
+end.

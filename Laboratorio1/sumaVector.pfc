@@ -1,0 +1,60 @@
+program sumaVector;
+
+type
+	tVector=Array[1..1000] of Integer;
+
+var
+	vector:tVector;
+	cantElementos:Integer;
+	suma:Integer;
+	
+
+
+procedure leer(var vector:tVector);
+var 
+	i:Integer;
+
+begin
+	WriteLn('Digite la cantidad de elementos del vector: ');
+	ReadLn(cantElementos);
+
+	for i:=1 to cantElementos do
+	begin
+		WriteLn('Digite el elemento ',i,':');
+		ReadLn(vector[i]);
+	end;
+end;
+
+
+
+procedure sumar(var vector:tVector;cantElementos:Integer;var suma:Integer);
+var
+	i:Integer;
+
+begin
+	suma:=0;
+	for i:=1 to cantElementos do
+	begin
+		suma:=suma+vector[i];
+	end;
+end;
+
+
+procedure imprimir(var vector:tVector;canteElementos:Integer;suma:Integer);
+var
+	i:Integer;
+begin
+	WriteLn('La suma de los siguientes elementos del vector: ');
+	for i:=1 to cantElementos do
+	begin
+		WriteLn('Elemento ',i,': ',vector[i]);
+	end;
+	WriteLn('Es igual a ',suma);
+end;
+
+
+begin
+	leer(vector);
+	sumar(vector,cantElementos,suma);
+	imprimir(vector,cantElementos,suma);
+end.

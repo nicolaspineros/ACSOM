@@ -1,0 +1,219 @@
+/Miguel Ángel Rodríguez Siachoque.
+		input
+		store		limit
+		jns		while
+/Recorre los numeros para halla su divisor, perfectos, abundates y deficientes. 
+while,		load		limit
+		subt		one
+		skipcond	000
+		jump		runwhile
+		jump		endwhile
+runwhile,	load		limit
+		store		numero
+		jns		abund
+		add		nab
+		store		nab
+		load		nab
+		output
+		jns		perfec
+		jns		defic
+		load		limit
+		subt		one
+		store		limit
+		jump		while
+endwhile,	load		nde
+		output
+		load		npe
+		output
+		load		nab
+		output
+		HALT
+/Variable del programa principal
+limit,		dec		0
+one,		dec		1
+zero,		dec		0
+numero,		dec		0
+nab,		dec		0
+npe,		dec		0
+nde,		dec		0
+
+
+/Calcula numeros perfectos.
+perfec,		dec		0
+		clear
+		load		zero
+		store		numpe
+		load		numero
+		subt		one
+		store		divisor
+		jns		divisorn
+		store		numpe
+		load		numero
+		subt		numpe
+		skipcond	400
+		load		zero
+		load		one
+		store		per
+		load		per
+		jumpi		perfec
+/Variables de perfec.
+numpe,		dec		0
+per,		dec		0
+
+
+/Calcula numeros abundantes.
+abund,		dec		0
+		clear
+		load		zero
+		store		numab
+		load		numero
+		jns		divisorn
+		store		numab
+		load		numero
+		subt		numab
+		skipcond	000
+		load		zero
+		load		one
+		store		ab
+		load		ab
+		jumpi		abund
+/Variables de abund.
+numab,		dec		0
+ab,		dec		0
+
+/Calcula numeros deficientes.
+defic,		dec		0
+		clear
+		load		zero
+		store		numdef
+		load		numero
+		subt		one
+		store		divisor
+		jns		divisorn
+		store		numdef
+		load		numero
+		subt		numdef
+		skipcond	800
+		load		zero
+		load		one
+		store		def
+		load		def
+		jumpi		defic
+/Variables de defic.
+numdef,		dec		0
+def,		dec		0
+
+/Calcula los divisores del numero
+divisorn,	dec		0
+		clear
+		load		zero
+		store		resdiviso
+		store		divisor
+		load		numero
+		subt		one
+		store		divisor
+/Halla divisro.
+whiledivn,	load		divisor
+		subt		one
+		skipcond	000
+		jump		divn
+		jump		endwhiledivn
+/Halla residuo.
+divn,		jns		mod
+		store		residuo
+		load		residuo
+		skipcond	400
+		jump		divi
+		load		resdiviso
+		add		divisor
+		store		resdiviso
+/Divide
+divi,		load		divisor
+		subt		one
+		store		divisor
+		jump		whiledivn
+endwhiledivn,	load		resdiviso
+		jumpi		divisorn
+/Variables de divisorn.
+resdiviso,	dec		0
+residuo,	dec		0
+
+/Calcula el residuo del numero.
+mod,		dec		0
+		clear
+		load		zero
+		store		resmod
+		load		numero
+		store		p
+		load		divisor
+		store		q
+		jns		div
+		store		division
+		load		division
+		store		p
+		load		divisor
+		store		q
+		jns		mult
+		store		produc
+		load		resmod
+		add		numero
+		store		resmod
+		load		resmod
+		subt		produc
+		store		resmod
+		load		resmod
+		jumpi		mod
+/Variable mod.
+divisor,	dec		0
+division,	dec		0
+produc,		dec		0
+resmod,		dec		0
+
+/HAlla la multiplicacion de dos numeros.
+mult,		dec		0
+		clear
+		store		m
+		store		i
+whileMult,	subt		q
+		skipcond	000
+		jump		endwhileMult
+		load		m
+		add		p
+		store		m
+		load		i
+		add		one
+		store		i
+		jump		whileMult
+endwhileMult,	load		m
+		jumpi		mult
+/Variables de mult.
+m,		dec		0
+i,		dec		0
+
+
+/Realiza la division del numero en p y q partes.
+div,		dec		0
+		clear
+		store		d
+whilediv,	load		p
+		subt		q
+		skipcond	000
+		jump		cuerpodiv
+		jump		endwhilediv
+cuerpodiv,	load		p
+		subt		q
+		store		p
+		load		d
+		add		one
+		store		d
+		jump		whilediv
+endwhilediv,	load		d
+		jumpi		div
+/Variable de div.
+p,		dec		0
+q,		dec		0
+d,		dec		0
+
+
+
+
